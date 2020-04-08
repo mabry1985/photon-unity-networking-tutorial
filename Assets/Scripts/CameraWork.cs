@@ -10,7 +10,7 @@
 
 using UnityEngine;
 
-namespace Photon.Pun.Demo.PunBasics
+namespace PhotonPractice
 {
 	/// <summary>
 	/// Camera work. Follow a target

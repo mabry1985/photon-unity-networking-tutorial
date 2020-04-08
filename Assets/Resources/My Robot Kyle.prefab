@@ -595,9 +595,9 @@ GameObject:
   - component: {fileID: 7301112067554868726}
   - component: {fileID: -4077511289508307453}
   - component: {fileID: 7261273547271408666}
-  - component: {fileID: 5421079624436916355}
   - component: {fileID: 8830848414150265410}
   - component: {fileID: 5992189938807425936}
+  - component: {fileID: -77286164560019789}
   - component: {fileID: -3673496589551915343}
   m_Layer: 0
   m_Name: My Robot Kyle
@@ -688,7 +688,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8830848414150265410}
   - {fileID: 5992189938807425936}
-  - {fileID: 5421079624436916355}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -709,21 +709,6 @@ MonoBehaviour:
   centerOffset: {x: 0, y: 2.82, z: 0}
   followOnStart: 0
   smoothSpeed: 0.125
---- !u!114 &5421079624436916355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8206557898829952428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46fc9dd3ff728f4b901d2a92378082c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 1
-  playerUiPrefab: {fileID: 0}
-  beams: {fileID: 411303523}
 --- !u!114 &8830848414150265410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,6 +754,22 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &-77286164560019789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206557898829952428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46fc9dd3ff728f4b901d2a92378082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 1
+  PlayerUiPrefab: {fileID: 8875346185967625291, guid: 26b58136902b8f440a6cc52442d024d0,
+    type: 3}
+  beams: {fileID: 411303523}
 --- !u!143 &-3673496589551915343
 CharacterController:
   m_ObjectHideFlags: 0

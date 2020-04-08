@@ -1,24 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Launcher.cs" company="Exit Games GmbH">
-//   Part of: Photon Unity Networking Demos
-// </copyright>
-// <summary>
-//  Used in PUN Basics Tutorial to connect, and join/create room automatically
-// </summary>
-// <author>developer@exitgames.com</author>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using UnityEngine;
 
-using UnityEngine;
-
-namespace Photon.Pun.Demo.PunBasics
-{
-	/// <summary>
-	/// Simple behaviour to animate particles around to create a typical "Ajax Loader". this is actually very important to visual inform the user that something is happening
-	/// or better say that the application is not frozen, so a animation of some sort helps reassuring the user that the system is idle and well.
-	/// 
-	/// TODO: hide when connection failed.
-	/// 
-	/// </summary>
 	public class LoaderAnime : MonoBehaviour {
 
 		#region Public Variables
@@ -47,9 +28,6 @@ namespace Photon.Pun.Demo.PunBasics
 		
 		#region MonoBehaviour CallBacks
 		
-		/// <summary>
-		/// MonoBehaviour method called on GameObject by Unity during early initialization phase.
-		/// </summary>
 		void Awake()
 		{
 			// cache for efficiency
@@ -58,9 +36,6 @@ namespace Photon.Pun.Demo.PunBasics
 		}
 
 		
-		/// <summary>
-		/// MonoBehaviour method called on GameObject by Unity on every frame.
-		/// </summary>
 		void Update () {
 
 			// only care about rotating particles if we are animating
@@ -98,4 +73,3 @@ namespace Photon.Pun.Demo.PunBasics
 
 		#endregion
 	}
-}

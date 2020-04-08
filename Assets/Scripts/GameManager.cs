@@ -4,15 +4,17 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
-namespace Com.MyCompany.MyGame
-{
+using Players;
+
     public class GameManager : MonoBehaviourPunCallbacks
     {
         #region Public Fields
 
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
-        
+
+        public static GameManager Instance;
+
         #endregion
 
         #region MonoBehaviour CallBacks
@@ -22,6 +24,7 @@ namespace Com.MyCompany.MyGame
         /// </summary>
         void Start()
         {
+            Instance = this;
 
             if (playerPrefab == null)
             { // #Tip Never assume public properties of Components are filled up properly, always check and inform the developer of it.
@@ -31,7 +34,7 @@ namespace Com.MyCompany.MyGame
             else
             {
 
-                if (Photon.Pun.Demo.PunBasics.PlayerManager.LocalPlayerInstance == null)
+                if (PlayerManager.LocalPlayerInstance == null)
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
@@ -127,6 +130,6 @@ namespace Com.MyCompany.MyGame
 
 
     }
-}
+
 
 

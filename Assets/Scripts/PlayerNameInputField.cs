@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 using System.Collections;
 
-namespace Com.MyCompany.MyGame
+namespace PhotonPractice
 {
     public class PlayerNameInputField : MonoBehaviour
     {

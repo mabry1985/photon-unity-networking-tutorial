@@ -2,7 +2,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-namespace Com.MyCompany.MyGame
+namespace PhotonPractice
 {
     public class PlayerAnimatorManager : MonoBehaviourPun
     {

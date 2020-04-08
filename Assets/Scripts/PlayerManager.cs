@@ -1,17 +1,10 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PlayerManager.cs" company="Exit Games GmbH">
-//   Part of: Photon Unity Networking Demos
-// </copyright>
-// <summary>
-//  Used in PUN Basics Tutorial to deal with the networked player instance
-// </summary>
-// <author>developer@exitgames.com</author>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using UnityEngine;
+using UnityEngine.EventSystems; 
+using Photon.Pun;
 
-using UnityEngine;
-using UnityEngine.EventSystems;
+using PhotonPractice;
 
-namespace Photon.Pun.Demo.PunBasics
+namespace Players
 {
 #pragma warning disable 649
 
@@ -26,6 +19,10 @@ namespace Photon.Pun.Demo.PunBasics
         [Tooltip("The current Health of our player")]
         public float Health = 1f;
 
+        [Tooltip("The Player's UI GameObject Prefab")]
+        [SerializeField]
+        public GameObject PlayerUiPrefab;
+
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
 
@@ -33,24 +30,17 @@ namespace Photon.Pun.Demo.PunBasics
 
         #region Private Fields
 
-        [Tooltip("The Player's UI GameObject Prefab")]
-        [SerializeField]
-        private GameObject playerUiPrefab;
-
         [Tooltip("The Beams GameObject to control")]
         [SerializeField]
         private GameObject beams;
 
         //True, when the user is firing
-        bool IsFiring;
+        private bool IsFiring;
 
         #endregion
 
         #region MonoBehaviour CallBacks
 
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
-        /// </summary>
         public void Awake()
         {
             if (this.beams == null)
@@ -74,9 +64,6 @@ namespace Photon.Pun.Demo.PunBasics
             DontDestroyOnLoad(gameObject);
         }
 
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity during initialization phase.
-        /// </summary>
         public void Start()
         {
             CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
@@ -94,9 +81,9 @@ namespace Photon.Pun.Demo.PunBasics
             }
 
             // Create the UI
-            if (this.playerUiPrefab != null)
+            if (this.PlayerUiPrefab != null)
             {
-                GameObject _uiGo = Instantiate(this.playerUiPrefab);
+                GameObject _uiGo = Instantiate(this.PlayerUiPrefab);
                 _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
             }
             else
@@ -104,37 +91,23 @@ namespace Photon.Pun.Demo.PunBasics
                 Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
             }
 
-#if UNITY_5_4_OR_NEWER
-            // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-#endif
-        }
 
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+
+        }
 
         public override void OnDisable()
         {
             // Always call the base to remove callbacks
             base.OnDisable();
-
-#if UNITY_5_4_OR_NEWER
             UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
-#endif
         }
 
-
-        /// <summary>
-        /// MonoBehaviour method called on GameObject by Unity on every frame.
-        /// Process Inputs if local player.
-        /// Show and hide the beams
-        /// Watch for end of game, when local player health is 0.
-        /// </summary>
         public void Update()
         {
-            Debug.Log("photonview" + photonView.IsMine);
-            // we only process Inputs and check health if we are the local player
             if (photonView.IsMine)
             {
-                print("photon view is mine");
+
                 this.ProcessInputs();
 
                 if (this.Health <= 0f)
@@ -162,9 +135,6 @@ namespace Photon.Pun.Demo.PunBasics
                 return;
             }
 
-
-            // We are only interested in Beamers
-            // we should be using tags but for the sake of distribution, let's simply check by name.
             if (!other.name.Contains("Beam"))
             {
                 return;
@@ -180,14 +150,11 @@ namespace Photon.Pun.Demo.PunBasics
         /// <param name="other">Other.</param>
         public void OnTriggerStay(Collider other)
         {
-            // we dont' do anything if we are not the local player.
             if (!photonView.IsMine)
             {
                 return;
             }
 
-            // We are only interested in Beamers
-            // we should be using tags but for the sake of distribution, let's simply check by name.
             if (!other.name.Contains("Beam"))
             {
                 return;
@@ -198,14 +165,10 @@ namespace Photon.Pun.Demo.PunBasics
         }
 
 
-#if !UNITY_5_4_OR_NEWER
-        /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
         void OnLevelWasLoaded(int level)
         {
             this.CalledOnLevelWasLoaded(level);
         }
-#endif
-
 
         /// <summary>
         /// MonoBehaviour method called after a new level of index 'level' was loaded.
@@ -221,7 +184,7 @@ namespace Photon.Pun.Demo.PunBasics
                 transform.position = new Vector3(0f, 5f, 0f);
             }
 
-            GameObject _uiGo = Instantiate(this.playerUiPrefab);
+            GameObject _uiGo = Instantiate(this.PlayerUiPrefab);
             _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
         }
 
@@ -230,12 +193,10 @@ namespace Photon.Pun.Demo.PunBasics
         #region Private Methods
 
 
-#if UNITY_5_4_OR_NEWER
         void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
         {
             this.CalledOnLevelWasLoaded(scene.buildIndex);
         }
-#endif
 
         /// <summary>
         /// Processes the inputs. This MUST ONLY BE USED when the player has authority over this Networked GameObject (photonView.isMine == true)

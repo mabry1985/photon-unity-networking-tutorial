@@ -2,7 +2,7 @@
 using UnityEngine;
 using Photon.Realtime;
 
-namespace Com.MyCompany.MyGame
+namespace PhotonPractice
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
