@@ -127,15 +127,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4077511289508307453, guid: 3f7c6249c15535f4ba0f4377b6126585,
-        type: 3}
-      propertyPath: viewIdField
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8206557898829952428, guid: 3f7c6249c15535f4ba0f4377b6126585,
         type: 3}
       propertyPath: m_Name
       value: My Robot Kyle
+      objectReference: {fileID: 0}
+    - target: {fileID: -4077511289508307453, guid: 3f7c6249c15535f4ba0f4377b6126585,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8206557898829523340, guid: 3f7c6249c15535f4ba0f4377b6126585,
         type: 3}
@@ -190,6 +190,11 @@ PrefabInstance:
     - target: {fileID: 8206557898829523340, guid: 3f7c6249c15535f4ba0f4377b6126585,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261273547271408666, guid: 3f7c6249c15535f4ba0f4377b6126585,
+        type: 3}
+      propertyPath: followOnStart
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

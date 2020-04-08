@@ -79,8 +79,8 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         public void Start()
         {
+            print(gameObject.name);
             CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
-
             if (_cameraWork != null)
             {
                 if (photonView.IsMine)
